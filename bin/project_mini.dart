@@ -144,6 +144,13 @@ Future<void> SearchExpenses() async {
     return;
   }
   final jsonResult = json.decode(response.body) as List; //***** use json.decode when the response is a JSON array*****
-
+  if (jsonResult.isEmpty) {
+    print('No item: ${keyword}');
+  } else {
+    print('Search result:');
+    for (var item in jsonResult) {
+      
+    }
+  }
 
 }
