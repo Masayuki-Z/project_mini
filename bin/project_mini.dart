@@ -129,5 +129,6 @@ Future<void> showTodayExpenses(int userId) async {
 
 
 Future<void> SearchExpenses() async {
-
+  stdout.write("item to seach: ");
+  String? keyword = stdin.readLineSync()?.trim();
 }
