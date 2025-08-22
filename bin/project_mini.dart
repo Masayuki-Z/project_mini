@@ -64,8 +64,7 @@ Future<void> showmenu(int userId) async {
 
 
       //function Search expense
-      //
-      //
+      SearchExpenses();
 
 
     }else if (choice == "4"){
