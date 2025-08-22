@@ -7,7 +7,8 @@ import 'dart:convert';
 
 
 void main() async {
-   await login();
+  //  await login();
+  await showmenu(1);
    print('---bye---');
  }
   
@@ -64,7 +65,7 @@ Future<void> showmenu(int userId) async {
 
 
       //function Search expense
-      SearchExpenses();
+      await SearchExpenses();
 
 
     }else if (choice == "4"){
@@ -150,7 +151,7 @@ Future<void> SearchExpenses() async {
     for (var item in jsonResult) {
       final dt = DateTime.parse(item['date']);
       final dtLocal = dt.toLocal();
-      print('${item['id']}. ${item['item']} : ${item['paid']}฿ ${dtLocal.toString()}');
+      print('${item['id']}. ${item['items']} : ${item['paid']}฿ ${dtLocal.toString()}');
     }
   }
 
