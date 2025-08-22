@@ -135,4 +135,8 @@ Future<void> SearchExpenses() async {
     print('input keyword no success');
     return;
   }
+
+  final body = {"search": keyword};
+  final url = Uri.parse('http://localhost:3000/expenses/search');
+  final response = await http.post(url, body: body);
 }
