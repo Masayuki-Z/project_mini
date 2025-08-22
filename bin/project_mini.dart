@@ -149,7 +149,9 @@ Future<void> SearchExpenses() async {
   } else {
     print('Search result:');
     for (var item in jsonResult) {
-      
+      final dt = DateTime.parse(item['date']);
+      final dtLocal = dt.toLocal();
+      print('${item['id']}. ${item['item']} : ${item['paid']}฿ ${dtLocal.toString()}');
     }
   }
 
