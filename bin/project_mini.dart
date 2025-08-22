@@ -143,4 +143,7 @@ Future<void> SearchExpenses() async {
     print('Failed to search');
     return;
   }
+  final jsonResult = json.decode(response.body) as List; //***** use json.decode when the response is a JSON array*****
+
+
 }
