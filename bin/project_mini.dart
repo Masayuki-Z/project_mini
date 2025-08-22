@@ -127,3 +127,7 @@ Future<void> showTodayExpenses(int userId) async {
   }
 }
 
+
+Future<void> SearchExpenses() async {
+
+}
