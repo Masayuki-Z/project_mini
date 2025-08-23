@@ -133,7 +133,7 @@ Future<void> delete() async{
   print("===== Delete an item =====");
   stdout.write("Item id: ");
   String? itemid = stdin.readLineSync()?.trim();
-  if(itemid == null || itemid.isEmpty){print("This item doesn't exist");}
+  if(itemid == null || itemid.isEmpty){print("This item doesn't exist"); return;}
   final body = {
     "expenseId": itemid
     
