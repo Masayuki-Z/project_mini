@@ -127,3 +127,10 @@ Future<void> showTodayExpenses(int userId) async {
   }
 }
 
+Future<void> delete() async{
+  print("===== Delete an item =====");
+  stdout.write("Item id: ");
+  String? itemid = stdin.readLineSync()?.trim();
+  if(itemid == null){print("This item doesn't exist");}
+
+}
