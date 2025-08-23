@@ -62,14 +62,47 @@ Future<void> showmenu(int userId) async {
       //
       //
     } else if (choice == "4") {
-      //Add a new expense
+      //function Add new expense
       print("===== Add new item =====");
       stdout.write("Item: ");
       String? items = stdin.readLineSync()?.trim();
       stdout.write("Paid: ");
       String? paid = stdin.readLineSync()?.trim();
+
+      // --- Input Validation ---
+      if (items == null || items.isEmpty || paid == null || paid.isEmpty) {
+        print("Item and Paid amount cannot be empty. Please try again.");
+        return;
+      }
+
+      // Optional: Check if 'paid' is a valid number
+      if (double.tryParse(paid) == null) {
+        print("Invalid amount. Please enter a valid number for Paid.");
+        return;
+      }
+
+      try {
+        // --- Prepare and Send HTTP Request ---
+        final url = Uri.parse('http://localhost:3000/expenses',); // Standard REST API endpoint for creating a resource
+        final body = {
+          'items': items,
+          'paid': paid,
+          'userId': userId.toString(), // Pass the logged-in user's ID
+        };
+
+        final response = await http.post(url, body: body);
+
+        // --- Handle Response ---
+        if (response.statusCode == 201 || response.statusCode == 200) {
+          // 201 Created is the most appropriate success code
+          print("Inserted!");
+        } else {
+          print("Failed to add expense. Error: ${response.body}");
+        }
+      } catch (e) {
+        print("An error occurred while connecting to the server: $e");
+      }
       //
-      //function Add new expense
     } else if (choice == "5") {
       //
       //
