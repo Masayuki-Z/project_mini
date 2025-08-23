@@ -132,5 +132,9 @@ Future<void> delete() async{
   stdout.write("Item id: ");
   String? itemid = stdin.readLineSync()?.trim();
   if(itemid == null){print("This item doesn't exist");}
-
+  final body = {
+    "expenseId": itemid
+    
+  };
+  final url = Uri.parse('http://localhost:3000/expense/delete');
 }
