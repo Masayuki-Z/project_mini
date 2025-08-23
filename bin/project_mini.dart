@@ -137,4 +137,12 @@ Future<void> delete() async{
     
   };
   final url = Uri.parse('http://localhost:3000/expense/delete');
+  final response = await http.delete(url, body: body);
+  final result = response.body;
+  if(response.statusCode == 200){
+    print(result);
+    return;
+  }else{
+    print("Expense not found");
+  }
 }
