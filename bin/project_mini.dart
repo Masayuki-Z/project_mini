@@ -78,6 +78,7 @@ Future<void> showmenu(int userId) async {
       //
       //
       //function Delete an expense
+      await delete();
     }
 
   } while (choice != "6");
