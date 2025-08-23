@@ -5,12 +5,10 @@ import 'dart:io';
 
 import 'dart:convert';
 
-
 void main() async {
-   await login();
-   print('---bye---');
- }
-  
+  await login();
+  print('---bye---');
+}
 
 Future<void> login() async {
   print("===== Login =====");
@@ -24,7 +22,6 @@ Future<void> login() async {
     return;
   }
 
-
   final body = {"username": username, "password": password};
   final url = Uri.parse('http://localhost:3000/login');
   final response = await http.post(url, body: body);
@@ -32,7 +29,7 @@ Future<void> login() async {
   if (response.statusCode == 200) {
     // the response.body is String
     final data = jsonDecode(response.body);
-    final userId = data['userId'];   // <--- comes from backend
+    final userId = data['userId']; // <--- comes from backend
     print("Login OK!");
     await showmenu(userId);
   } else if (response.statusCode == 401 || response.statusCode == 500) {
@@ -61,25 +58,23 @@ Future<void> showmenu(int userId) async {
     } else if (choice == "2") {
       await showTodayExpenses(userId);
     } else if (choice == "3") {
-
-
       //function Search expense
       //
       //
-
-
-    }else if (choice == "4"){
-      //
+    } else if (choice == "4") {
+      //Add a new expense
+      print("===== Add new item =====");
+      stdout.write("Item: ");
+      String? items = stdin.readLineSync()?.trim();
+      stdout.write("Paid: ");
+      String? paid = stdin.readLineSync()?.trim();
       //
       //function Add new expense
-
-
-    }else if (choice == "5"){
+    } else if (choice == "5") {
       //
       //
       //function Delete an expense
     }
-
   } while (choice != "6");
 }
 
@@ -95,8 +90,10 @@ Future<void> showAllExpenses(int userId) async {
       int total = 0;
       print("=== All Expenses ===");
       for (var exp in expenses) {
-        print(" ${exp['id']}., ${exp['items']},  ${exp['paid']}, ${exp['date']}");
-         total += (exp['paid'] as num).toInt();
+        print(
+          " ${exp['id']}., ${exp['items']},  ${exp['paid']}, ${exp['date']}",
+        );
+        total += (exp['paid'] as num).toInt();
       }
       print("Total expense: ${total}฿ ");
     }
@@ -126,4 +123,3 @@ Future<void> showTodayExpenses(int userId) async {
     print("Error fetching today's expenses: ${response.body}");
   }
 }
-
