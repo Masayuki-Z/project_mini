@@ -7,7 +7,8 @@ import 'dart:convert';
 
 
 void main() async {
-   await login();
+  await login();
+  await showmenu(1);
    print('---bye---');
  }
   
@@ -64,8 +65,7 @@ Future<void> showmenu(int userId) async {
 
 
       //function Search expense
-      //
-      //
+      await SearchExpenses();
 
 
     }else if (choice == "4"){
@@ -128,6 +128,7 @@ Future<void> showTodayExpenses(int userId) async {
   }
 }
 
+
 Future<void> delete() async{
   print("===== Delete an item =====");
   stdout.write("Item id: ");
@@ -147,3 +148,33 @@ Future<void> delete() async{
     print("Expense not found");
   }
 }
+
+Future<void> SearchExpenses() async {
+  stdout.write("item to seach: ");
+  String? keyword = stdin.readLineSync()?.trim();
+  if (keyword == null || keyword.isEmpty) {
+    print('input keyword no success');
+    return;
+  }
+
+  final body = {"search": keyword};
+  final url = Uri.parse('http://localhost:3000/expenses/search');
+  final response = await http.post(url, body: body);
+  if (response.statusCode != 200) {
+    print('Failed to search');
+    return;
+  }
+  final jsonResult = json.decode(response.body) as List; //***** use json.decode when the response is a JSON array*****
+  if (jsonResult.isEmpty) {
+    print('No item: ${keyword}');
+  } else {
+    print('Search result:');
+    for (var item in jsonResult) {
+      final dt = DateTime.parse(item['date']);
+      final dtLocal = dt.toLocal();
+      print('${item['id']}. ${item['items']} : ${item['paid']}฿ ${dtLocal.toString()}');
+    }
+  }
+
+}
+
