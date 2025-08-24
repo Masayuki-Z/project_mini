@@ -128,7 +128,7 @@ Future<void> showTodayExpenses(int userId) async {
 }
 
 
-Future<void> SearchExpenses() async {
+Future<void> SearchExpenses(int userId) async {
   stdout.write("item to seach: ");
   String? keyword = stdin.readLineSync()?.trim();
   if (keyword == null || keyword.isEmpty) {
@@ -136,8 +136,8 @@ Future<void> SearchExpenses() async {
     return;
   }
 
-  final body = {"search": keyword};
-  final url = Uri.parse('http://localhost:3000/expenses/search');
+  final body = {"search": keyword, "userId": userId.toString()};
+  final url = Uri.parse('http://localhost:3000/expenses/search/$userId');
   final response = await http.post(url, body: body);
   if (response.statusCode != 200) {
     print('Failed to search');
@@ -154,5 +154,4 @@ Future<void> SearchExpenses() async {
       print('${item['id']}. ${item['items']} : ${item['paid']}฿ ${dtLocal.toString()}');
     }
   }
-
 }
