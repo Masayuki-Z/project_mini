@@ -7,8 +7,8 @@ import 'dart:convert';
 
 
 void main() async {
-  await login();
-  await showmenu(1);
+  // await login();
+  await showmenu(2);
    print('---bye---');
  }
   
@@ -65,7 +65,7 @@ Future<void> showmenu(int userId) async {
 
 
       //function Search expense
-      await SearchExpenses();
+      await SearchExpenses(userId);
 
 
     }else if (choice == "4"){
