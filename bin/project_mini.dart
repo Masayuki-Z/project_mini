@@ -69,7 +69,7 @@ Future<void> showmenu(int userId) async {
       //
       //
       //function Delete an expense
-      await delete();
+      await delete(userId);
     }
   } while (choice != "6");
 }
@@ -165,13 +165,14 @@ Future<void> showTodayExpenses(int userId) async {
 }
 
 
-Future<void> delete() async{
+Future<void> delete(int userId) async{
   print("===== Delete an item =====");
   stdout.write("Item id: ");
   String? itemid = stdin.readLineSync()?.trim();
   if(itemid == null || itemid.isEmpty){print("This item doesn't exist"); return;}
   final body = {
-    "expenseId": itemid
+    "expenseId": itemid,
+    "userId": userId.toString()
     
   };
   final url = Uri.parse('http://localhost:3000/expense/delete');
@@ -180,8 +181,15 @@ Future<void> delete() async{
   if(response.statusCode == 200){
     print(result);
     return;
-  }else{
+  }
+  else if(response.statusCode == 403){
+    print("You cannot delete this expense. IT doesn't belong to you.");
+  }
+  else if(response.statusCode == 404){
     print("Expense not found");
+  }
+  else{
+    print("Error deleting expense: $result");
   }
 }
 
