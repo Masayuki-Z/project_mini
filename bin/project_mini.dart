@@ -43,8 +43,20 @@ Future<void> login() async {
 
 Future<void> showmenu(int userId) async {
   String? choice;
+  final url = Uri.parse('http://localhost:3000/users/$userId');
+  final response = await http.get(url);
+
   do {
     print("======= Expense tracking app =======");
+
+     if (response.statusCode == 200) {
+    final data = jsonDecode(response.body);
+    final username = data['username'];
+    print("Welcome $username");
+}else{
+  print("Error for fetching username");
+}
+
     print("1. All expense");
     print("2. Today's expense");
     print("3. Search expense");
@@ -216,7 +228,7 @@ Future<void> SearchExpenses(int userId) async {
     for (var item in jsonResult) {
       final dt = DateTime.parse(item['date']);
       final dtLocal = dt.toLocal();
-      print('${item['id']}. ${item['items']} : ${item['paid']}฿ ${dtLocal.toString()}');
+      print('${item['id']}. ${item['items']} : ${item['paid' ]}฿ : ${dtLocal.toString()}');
     }
   }
 }
