@@ -97,7 +97,7 @@ Future<void> add(int userId) async{
       try {
         // --- Prepare and Send HTTP Request ---
         final url = Uri.parse(
-          'http://localhost:3000/expenses',
+          'http://localhost:3000/expenses/add',
         ); // Standard REST API endpoint for creating a resource
         final body = {
           'items': items,
