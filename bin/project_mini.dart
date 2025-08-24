@@ -59,152 +59,22 @@ Future<void> showmenu(int userId) async {
     } else if (choice == "2") {
       await showTodayExpenses(userId);
     } else if (choice == "3") {
-      //function Search expense
+      await SearchExpenses();
       //
       //
     } else if (choice == "4") {
-      await SearchExpenses();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-      //function Add new expense
+      await add(userId);
+    } 
+    else if (choice == "5") {
+      //
+      //
+      //function Delete an expense
+    }
+  } while (choice != "6");
+}
+
+Future<void> add(int userId) async{
+  //function Add new expense
       print("===== Add new item =====");
       stdout.write("Item: ");
       String? items = stdin.readLineSync()?.trim();
@@ -245,13 +115,8 @@ Future<void> showmenu(int userId) async {
       } catch (e) {
         print("An error occurred while connecting to the server: $e");
       }
-    } else if (choice == "5") {
-      //
-      //
-      //function Delete an expense
-    }
-  } while (choice != "6");
 }
+
 
 Future<void> showAllExpenses(int userId) async {
   final url = Uri.parse('http://localhost:3000/expenses/$userId');
