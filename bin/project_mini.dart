@@ -132,8 +132,7 @@ Future<void> showAllExpenses(int userId) async {
       print("=== All Expenses ===");
       for (var exp in expenses) {
         print(
-          " ${exp['id']}., ${exp['items']},  ${exp['paid']}, ${exp['date']}",
-        );
+          " ${exp['id']}. ${exp['items']}:  ${exp['paid' ]}฿ : ${exp['date']}");
         total += (exp['paid'] as num).toInt();
       }
       print("Total expense: ${total}฿ ");
@@ -155,7 +154,7 @@ Future<void> showTodayExpenses(int userId) async {
       print("=== Today's Expenses ===");
       int total = 0;
       for (var exp in expenses) {
-        print(" ${exp['id']}, ${exp['items']}, ${exp['paid']}, ${exp['date']}");
+        print(" ${exp['id']}. ${exp['items']}:  ${exp['paid' ]}฿ : ${exp['date']}");
         total += (exp['paid'] as num).toInt();
       }
       print("Total expense: ${total}฿ ");
@@ -209,7 +208,7 @@ Future<void> SearchExpenses() async {
     for (var item in jsonResult) {
       final dt = DateTime.parse(item['date']);
       final dtLocal = dt.toLocal();
-      print('${item['id']}. ${item['items']} : ${item['paid']}฿ ${dtLocal.toString()}');
+      print('${item['id']}. ${item['items' ]} : ${item['paid' ]}฿ : ${dtLocal.toString()}');
     }
   }
 
